@@ -42,31 +42,16 @@
  */
 class Solution {
     public int climbStairs(int n) {
-        int count=0;
-        int p = n/2;
-        int q = n%2;
-        for(; p+q<=n;p=p-1,q=q+2){
-            count=count+sort(p+q, q);
-        }
-        return count;
-        
-        
-    }
-
-    public static int sort(int a,int b){
-        if(b==0||a==b)
+        if (n == 1) {
             return 1;
-        int x=a,y=b,z=a-b,t=a-b;
-        while(a>1){
-            x=x*(--a);
         }
-        while(b>1){
-            y=y*(--b);
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
         }
-        while(t>1){
-            z=z*(--t);
-        }
-        return x/(y*z);
+        return dp[n];
     }
 }
 
